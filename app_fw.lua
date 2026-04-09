@@ -77,20 +77,13 @@ function laptop.register_view(name, def)
 	laptop.apps[name] = def
 end
 
--- load all apps
+-- load all apps (browser_app first as it defines laptop.browser_api)
 local app_path = minetest.get_modpath('laptop')..'/apps/'
 local app_list = minetest.get_dir_list(app_path, false)
 
-for _, file in ipairs(app_list) do
-	if file:sub(-8) == '_app.lua' then
-		dofile(app_path..file)
-	end
-end
-
 dofile(app_path..'browser_app.lua')
 for _, file in ipairs(app_list) do
-    if file:sub(-8) == '_app.lua' and file ~= 'browser_app.lua' 
-then
-        dofile(app_path..file)
-    end
+	if file:sub(-8) == '_app.lua' and file ~= 'browser_app.lua' then
+		dofile(app_path..file)
+	end
 end

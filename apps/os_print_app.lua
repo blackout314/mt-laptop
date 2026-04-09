@@ -72,7 +72,6 @@ laptop.register_app("printer_launcher", {
 		mtos.sysdata.selected_view = mtos.sysdata.selected_view or 'output'
 		sync_stack_values(mtos)
 		trigger_queue(launcher_app, mtos)
-		mtos.bdev:sync()
 		-- inventory fields
 		local formspec = "size[9,8]"..
 				"list[current_player;main;0.3,3.85;8,1;]" ..
