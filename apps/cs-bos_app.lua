@@ -226,7 +226,7 @@ laptop.register_app("cs-bos_launcher", {
 					if hwdef_next.hw_state then
 						mtos[hwdef_next.hw_state](mtos, mtos.hwdef.next_node)
 					else
-						mtos:swap_node(hwdef.next_node)
+						mtos:swap_node(mtos.hwdef.next_node)
 						mtos:save()
 					end
 				end
@@ -274,7 +274,7 @@ laptop.register_app("cs-bos_launcher", {
 				local searchstring, diskname = simple_vfs.parse_path(input_line:sub(5))
 				local disk, inserted = simple_vfs.get_disk(mtos, diskname or data.current_disk)
 				if disk and inserted then
-					local txtdata = mtos.bdev:get_app_storage(disk.dev, 'stickynote:files')
+					local txtdata = mtos.bdev:get_app_storage(disk.dev, 'stickynote:files') or {}
 					local message = "VIEWING CONTENTS OF "..disk:get_full_name(mtos)
 					if searchstring and searchstring ~= '' then
 						message = message .. ' FILTER STRING '..searchstring
